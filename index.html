@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Te amo Valeria</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: linear-gradient(to bottom, #0f172a, #1e293b);
+    color: white;
+    text-align: center;
+}
+
+/* Intro */
+.intro {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    z-index: 10;
+    cursor: pointer;
+}
+
+/* Ocultar intro */
+.ocultar {
+    animation: desaparecer 2s forwards;
+}
+
+@keyframes desaparecer {
+    to {opacity: 0; visibility: hidden;}
+}
+
+/* Botón */
+.boton {
+    background: #f43f5e;
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+/* Imagen */
+img {
+    width: 300px;
+    border-radius: 15px;
+}
+
+/* Carta */
+.carta {
+    max-width: 600px;
+    margin: auto;
+    background: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+/* Corazones */
+.corazon {
+    position: fixed;
+    top: -10px;
+    color: red;
+    animation: caer linear infinite;
+}
+
+@keyframes caer {
+    to {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO (CLICK PARA EMPEZAR) -->
+<div class="intro" onclick="iniciarTodo()">
+    You love Valeria ❤️<br><br>
+    <small>(toca la pantalla)</small>
+</div>
+
+<h1>Te amo Valeria 💖</h1>
+
+<button class="boton" onclick="toggleMusica()">⏸️ Pausar música</button>
+
+<audio id="musica" loop>
+    <source src="sweater_weather.mp3" type="audio/mpeg">
+</audio>
+
+<br><br>
+
+<img src="foto.jpg">
+
+<div class="carta">
+<p>
+Quién diría que todo empezaría en Telegram… entre mensajes, risas y conversaciones que se alargaban sin darnos cuenta. 
+Y aunque la distancia nos separa físicamente, siento que estamos más cerca.
+</p>
+
+<p>
+Me gusta pasar tiempo contigo cuando vemos TikTok, jodemos en los grupos, cuando jugamos Roblox. 
+Eres una persona increíble, cuando hablo contigo me siento feliz.
+</p>
+
+<p>
+Te amo tanto bb que haría cualquier cosa por ti. 
+Gracias por ser mi novia Valeria ❤️
+</p>
+</div>
+
+<script>
+let musicaIniciada = false;
+
+function iniciarTodo() {
+    const intro = document.querySelector(".intro");
+    const audio = document.getElementById("musica");
+
+    if (!musicaIniciada) {
+        audio.play();
+        musicaIniciada = true;
+    }
+
+    intro.classList.add("ocultar");
+}
+
+// Botón pausa/play
+function toggleMusica() {
+    const audio = document.getElementById("musica");
+    const boton = document.querySelector(".boton");
+
+    if (audio.paused) {
+        audio.play();
+        boton.innerHTML = "⏸️ Pausar música";
+    } else {
+        audio.pause();
+        boton.innerHTML = "▶️ Reproducir música";
+    }
+}
+
+// Corazones
+setInterval(() => {
+    let c = document.createElement("div");
+    c.className = "corazon";
+    c.innerHTML = "❤️";
+    c.style.left = Math.random() * window.innerWidth + "px";
+    c.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(c);
+
+    setTimeout(() => c.remove(), 5000);
+}, 300);
+</script>
+
+</body>
+</html>
